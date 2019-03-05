@@ -67,6 +67,7 @@ void RowSelect(U8 row);
 void StartLine(U8 line);
 void WriteByte(U8 byt);
 void WriteChar(U8 ch, U8 rev);
+void WriteCharAt(U8 ch, U8 xPos, U8 yPos, U8 rev);
 void ClearDisplay(void);
 
 #endif	/* KS108_H */

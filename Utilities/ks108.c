@@ -124,3 +124,28 @@ void WriteChar(U8 ch, U8 rev){
         }
     }
 }
+
+void WriteCharAt(U8 ch, U8 xPos, U8 yPos, U8 rev){
+    U8 i, j;
+    U8 OffsetMem = 48U;
+    char *chr;
+    
+    StartLine(0);
+    ChipSelect(xPos/8);
+	PageSelect(yPos);
+	RowSelect(xPos * 8);
+    
+    RS = 1;
+    RW = 0;
+    /*Due to memory constrain we only have digits 0 to 7
+      So we have an offset operation...*/
+    chr = Font8x8 + ((ch - OffsetMem) * 8U);
+    for(i = 0; i < 8; i++){
+        if(rev){
+            WriteByte(~(*chr++));
+        }
+        else{
+            WriteByte(*chr++);
+        }
+    }
+}

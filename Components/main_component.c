@@ -39,7 +39,13 @@ void Loop(void){
 
 void TestDotDisp(void){
     InitDisplay();
-    WriteChar('1', 0);
+    /*Display character 1 at the beginning of the display*/
+    WriteChar('1', 0U);
+    /*Display the character 1 at 2,2 location of the screen*/
+    WriteCharAt('1',2U,2U,0U);
+    /*Display the character 1 at the beginning of line 5 of the display*/
+    StartLine(5U);
+    WriteChar('1', 0U);
 }
 
 void PORT_setup(U8 P_A, U8 P_B, U8 P_C){
