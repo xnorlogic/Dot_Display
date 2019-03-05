@@ -7,30 +7,38 @@
 #include "main_component.h"
 #include "application.h"
 
+/*Bank selectors*/
+#define BANK_0 0x00
+#define BANK_1 0x01
+#define BANK_2 0x02
+#define BANK_3 0x03
+
+/*Configuration for the AD port A*/
+#define ADCON1_CONFIG_0 0x00 /*All Analog*/
+#define ADCON1_CONFIG_1 0x01 /*refere to page 84 of pic16f73 manual*/
+#define ADCON1_CONFIG_2 0x02 /*refere to page 84 of pic16f73 manual*/
+#define ADCON1_CONFIG_3 0x03 /*refere to page 84 of pic16f73 manual*/
+#define ADCON1_CONFIG_4 0x04 /*refere to page 84 of pic16f73 manual*/
+#define ADCON1_CONFIG_5 0x05 /*refere to page 84 of pic16f73 manual*/
+#define ADCON1_CONFIG_6 0x06 /*All Digital*/
+
 void Setup(void){
     
-    //MAIN TARGET DEVICE CONFIGS-------------
-    STATUSbits.RP0=0;
-    STATUSbits.RP1=0;
-    PORTA =0;
-    PORTB =0;
-    PORTC =0;
-    STATUSbits.RP0=1;
-    //CONFIG PORT A AS DIGITAL OUTPUTS
-    ADCON1bits.PCFG0=0;
-    ADCON1bits.PCFG1=1;
-    ADCON1bits.PCFG2=1;
-    //PORT B assignments
+    /*Select bank 0 to setup the PORTs*/
+    STATUS = BANK_0;
+    PORTA = 0x00;
+    PORTB = 0x00;
+    PORTC = 0x00;
+    /*Select bank 1 to setup the TRIS and the ADCON1*/
+    STATUS = BANK_1;
+    /*Port A as all digital*/
+    ADCON1 = ADCON1_CONFIG_6;
+    /*Port assignment*/
     TRISB=0x03;
-    PORTB=0;
-    //PORT A assignments
-    TRISA=0;
-    PORTA=0;
-    //PORT C assignments
-    TRISC=0;                   
-    PORTC=0;                    
-    STATUSbits.RP0=0;
-	//--------------------------------------
+    TRISA=0x00;
+    TRISC=0x00;
+    /*Return to bank 0*/
+    STATUS = BANK_0;
     
     MyFloatTest_Sat = 0.0f;
     MyFloatTest_NoSat = 0.0f;
