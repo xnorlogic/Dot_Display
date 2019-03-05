@@ -42,6 +42,7 @@ void NO_Saturated_Counter(void){
 }
 
 void TestDotDisp(void){
+    U8 i = 0;
     /*Init the display*/
     InitDisplay();
     /*Display character 1 at the beginning of the screen*/
@@ -51,7 +52,14 @@ void TestDotDisp(void){
     /*Display the character 1 at the beginning of line 5 of the screen*/
     StartLine(5U);
     WriteChar('1', 0U);
+
     /*display 2 at the beginning of line 9*/
     StartLine(9U);
     WriteChar('2', 0U);
+
+    /*write 10 1's at line 3*/
+    for(i = 0 ;i<10;i++){
+        WriteCharAt('1',i,3U,0U);
+    }
+
 }
