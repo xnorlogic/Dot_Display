@@ -7,14 +7,6 @@
 #include "main_component.h"
 #include "application.h"
 
-/*Port configuration*/
-/*PORT A -> All OUTPUTS*/
-#define PORTA_CONFIG 0x00
-/*PORT B -> RB0 and RB1 INPUTS, RB2 RB3 RB4 RB5 RB6 RB7 OUTPUTS*/
-#define PORTB_CONFIG 0x03
-/*PORT C -> All OUTPUTS*/
-#define PORTC_CONFIG 0x00
-
 void PORT_setup(U8 P_A, U8 P_B, U8 P_C);
 void PORT_A_setup(U8 configSelect);
 
@@ -31,21 +23,8 @@ void Setup(void){
 }
 
 void Loop(void){    
-    /*set the selector from the RB0 RB1 inputs*/
-    selector = (RB1 * 2U) + (RB0 * 1U);
-    /*call the counter selector*/
-    Counter_Selector();   
-}
-
-void TestDotDisp(void){
-    InitDisplay();
-    /*Display character 1 at the beginning of the display*/
-    WriteChar('1', 0U);
-    /*Display the character 1 at 2,2 location of the screen*/
-    WriteCharAt('1',2U,2U,0U);
-    /*Display the character 1 at the beginning of line 5 of the display*/
-    StartLine(5U);
-    WriteChar('1', 0U);
+    /*Call the Test Dot display routine*/
+    TestDotDisp();
 }
 
 void PORT_setup(U8 P_A, U8 P_B, U8 P_C){
