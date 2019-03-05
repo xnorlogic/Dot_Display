@@ -42,6 +42,7 @@ void NO_Saturated_Counter(void){
 }
 
 void TestDotDisp(void){
+    /*Init the display*/
     InitDisplay();
     /*Display character 1 at the beginning of the screen*/
     WriteChar('1', 0U);
