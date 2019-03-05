@@ -34,8 +34,20 @@
 #define 	CSB					PORTCbits.RC6
 #define 	CSB_TRIS			TRISCbits.TRISC6
 
-#define 	DATA_DIR_IN()		TRISB=0xFF
-#define 	DATA_DIR_OUT()	  	TRISB=0
+#define 	DATA_DIR_IN()\
+{\
+  STATUS = BANK_1;\
+  TRISB = 0xFF;\
+  STATUS = BANK_0;\
+}
+                                        
+#define 	DATA_DIR_OUT()\
+{\
+  STATUS = BANK_1;\
+  TRISB = 0x00;\
+  STATUS = BANK_0;\
+}
+                                        
 #define 	WR_DATA(a)			PORTB=(a)		
 #define 	RD_DATA()			PORTB
 
@@ -55,8 +67,7 @@ void RowSelect(U8 row);
 void StartLine(U8 line);
 void WriteByte(U8 byt);
 void WriteChar(U8 ch, U8 rev);
+void WriteCharAt(U8 ch, U8 xPos, U8 yPos, U8 rev);
 void ClearDisplay(void);
 
 #endif	/* KS108_H */
-
-

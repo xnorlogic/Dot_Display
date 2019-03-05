@@ -7,44 +7,36 @@
 #include "main_component.h"
 #include "application.h"
 
+void PORT_setup(U8 P_A, U8 P_B, U8 P_C);
+void PORT_A_setup(U8 configSelect);
+
 void Setup(void){
+    /*Port A Analog/Digital configuration*/
+    PORT_A_setup(ADCON1_CONFIG_6);
+    /*Port assignment configuration*/
+    PORT_setup(PORTA_CONFIG,PORTB_CONFIG,PORTC_CONFIG);
     
-    //MAIN TARGET DEVICE CONFIGS-------------
-    STATUSbits.RP0=0;
-    STATUSbits.RP1=0;
-    PORTA =0;
-    PORTB =0;
-    PORTC =0;
-    STATUSbits.RP0=1;
-    //CONFIG PORT A AS DIGITAL OUTPUTS
-    ADCON1bits.PCFG0=0;
-    ADCON1bits.PCFG1=1;
-    ADCON1bits.PCFG2=1;
-    //PORT B assignments
-    TRISB=0x03;
-    PORTB=0;
-    //PORT A assignments
-    TRISA=0;
-    PORTA=0;
-    //PORT C assignments
-    TRISC=0;                   
-    PORTC=0;                    
-    STATUSbits.RP0=0;
-	//--------------------------------------
-    
+    /*Application configuration specific*/
     MyFloatTest_Sat = 0.0f;
     MyFloatTest_NoSat = 0.0f;
     selector = 0U;
 }
 
 void Loop(void){    
-    /*set the selector from the RB0 RB1 inputs*/
-    selector = (RB1 * 2U) + (RB0 * 1U);
-    /*call the counter selector*/
-    Counter_Selector();   
+    /*Call the Test Dot display routine*/
+    TestDotDisp();
 }
 
-void TestDotDisp(void){
-    InitDisplay();
-    WriteChar('1', 0);
+void PORT_setup(U8 P_A, U8 P_B, U8 P_C){
+    STATUS = BANK_1;
+    TRISA=P_A;
+    TRISB=P_B;
+    TRISC=P_C;
+    STATUS = BANK_0;
+}
+
+void PORT_A_setup(U8 configSelect){
+    STATUS = BANK_1;
+    ADCON1 = configSelect;
+    STATUS = BANK_0;  
 }

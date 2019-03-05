@@ -29,8 +29,6 @@
 #ifndef XC_MAIN_COMPONENT_H
 #define	XC_MAIN_COMPONENT_H
 
-#include "ks108.h"
-
 /* PIC16F73 Configuration Bit Settings
    'C' source line config statements
    CONFIG*/
@@ -41,7 +39,6 @@
 #pragma config BOREN = OFF       // Brown-out Reset Enable bit (BOR enabled)
 
 void Setup(void);
-void TestDotDisp(void);
 void Loop(void);
 
 #endif	/* XC_MAIN_COMPONENT_H */

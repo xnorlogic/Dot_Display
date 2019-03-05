@@ -10,9 +10,6 @@
 void main(void) { 
     /*Setup function call*/
     Setup();
-    
-    TestDotDisp();
-    
     /*Main loop*/
     while(1){
         Loop();

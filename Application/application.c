@@ -40,3 +40,14 @@ void NO_Saturated_Counter(void){
     /*Non Saturated counter*/
     MyFloatTest_NoSat = MyFloatTest_NoSat + Increment;     
 }
+
+void TestDotDisp(void){
+    InitDisplay();
+    /*Display character 1 at the beginning of the screen*/
+    WriteChar('1', 0U);
+    /*Display the character 1 at 2,2 location of the screen*/
+    WriteCharAt('1',2U,2U,0U);
+    /*Display the character 1 at the beginning of line 5 of the screen*/
+    StartLine(5U);
+    WriteChar('1', 0U);
+}
