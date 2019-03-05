@@ -6,6 +6,7 @@
  */
 
 #include "application.h"
+#include <stdlib.h>
 
 F32 Saturation = 12.5f;
 F32 Increment = 0.5f;
@@ -43,11 +44,11 @@ void NO_Saturated_Counter(void){
 
 void TestDotDisp(void){
     InitDisplay();
-    /*Display character 1 at the beginning of the display*/
+    /*Display character 1 at the beginning of the screen*/
     WriteChar('1', 0U);
     /*Display the character 1 at 2,2 location of the screen*/
     WriteCharAt('1',2U,2U,0U);
-    /*Display the character 1 at the beginning of line 5 of the display*/
+    /*Display the character 1 at the beginning of line 5 of the screen*/
     StartLine(5U);
     WriteChar('1', 0U);
 }
