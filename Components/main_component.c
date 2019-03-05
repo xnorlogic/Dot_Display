@@ -23,7 +23,6 @@
 #define ADCON1_CONFIG_6 0x06 /*All Digital*/
 
 void Setup(void){
-    
     /*Select bank 0 to setup the PORTs*/
     STATUS = BANK_0;
     PORTA = 0x00;
@@ -34,12 +33,13 @@ void Setup(void){
     /*Port A as all digital*/
     ADCON1 = ADCON1_CONFIG_6;
     /*Port assignment*/
-    TRISB=0x03;
-    TRISA=0x00;
-    TRISC=0x00;
+    TRISB=0x03; /*RB0 and RB1 as inputs*/
+    TRISA=0x00; /*All outputs*/
+    TRISC=0x00; /*All outputs*/
     /*Return to bank 0*/
     STATUS = BANK_0;
     
+    /*Application configuration specific*/
     MyFloatTest_Sat = 0.0f;
     MyFloatTest_NoSat = 0.0f;
     selector = 0U;
