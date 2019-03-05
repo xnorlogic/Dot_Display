@@ -7,37 +7,22 @@
 #include "main_component.h"
 #include "application.h"
 
-/*Bank selectors*/
-#define BANK_0 0x00
-#define BANK_1 0x01
-#define BANK_2 0x02
-#define BANK_3 0x03
+/*Port configuration*/
+/*PORT A -> All OUTPUTS*/
+#define PORTA_CONFIG 0x00
+/*PORT B -> RB0 and RB1 INPUTS, RB2 RB3 RB4 RB5 RB6 RB7 OUTPUTS*/
+#define PORTB_CONFIG 0x03
+/*PORT C -> All OUTPUTS*/
+#define PORTC_CONFIG 0x00
 
-/*Configuration for the AD port A*/
-#define ADCON1_CONFIG_0 0x00 /*All Analog*/
-#define ADCON1_CONFIG_1 0x01 /*refere to page 84 of pic16f73 manual*/
-#define ADCON1_CONFIG_2 0x02 /*refere to page 84 of pic16f73 manual*/
-#define ADCON1_CONFIG_3 0x03 /*refere to page 84 of pic16f73 manual*/
-#define ADCON1_CONFIG_4 0x04 /*refere to page 84 of pic16f73 manual*/
-#define ADCON1_CONFIG_5 0x05 /*refere to page 84 of pic16f73 manual*/
-#define ADCON1_CONFIG_6 0x06 /*All Digital*/
+void PORT_setup(U8 P_A, U8 P_B, U8 P_C);
+void PORT_A_setup(U8 configSelect);
 
 void Setup(void){
-    /*Select bank 0 to setup the PORTs*/
-    STATUS = BANK_0;
-    PORTA = 0x00;
-    PORTB = 0x00;
-    PORTC = 0x00;
-    /*Select bank 1 to setup the TRIS and the ADCON1*/
-    STATUS = BANK_1;
-    /*Port A as all digital*/
-    ADCON1 = ADCON1_CONFIG_6;
-    /*Port assignment*/
-    TRISB=0x03; /*RB0 and RB1 as inputs*/
-    TRISA=0x00; /*All outputs*/
-    TRISC=0x00; /*All outputs*/
-    /*Return to bank 0*/
-    STATUS = BANK_0;
+    /*Port A Analog/Digital configuration*/
+    PORT_A_setup(ADCON1_CONFIG_6);
+    /*Port assignment configuration*/
+    PORT_setup(PORTA_CONFIG,PORTB_CONFIG,PORTC_CONFIG);
     
     /*Application configuration specific*/
     MyFloatTest_Sat = 0.0f;
@@ -55,4 +40,18 @@ void Loop(void){
 void TestDotDisp(void){
     InitDisplay();
     WriteChar('1', 0);
+}
+
+void PORT_setup(U8 P_A, U8 P_B, U8 P_C){
+    STATUS = BANK_1;
+    TRISA=P_A;
+    TRISB=P_B;
+    TRISC=P_C;
+    STATUS = BANK_0;
+}
+
+void PORT_A_setup(U8 configSelect){
+    STATUS = BANK_1;
+    ADCON1 = configSelect;
+    STATUS = BANK_0;  
 }

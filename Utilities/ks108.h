@@ -34,8 +34,20 @@
 #define 	CSB					PORTCbits.RC6
 #define 	CSB_TRIS			TRISCbits.TRISC6
 
-#define 	DATA_DIR_IN()		TRISB=0xFF
-#define 	DATA_DIR_OUT()	  	TRISB=0
+#define 	DATA_DIR_IN()\
+{\
+  STATUS = BANK_1;\
+  TRISB = 0xFF;\
+  STATUS = BANK_0;\
+}
+                                        
+#define 	DATA_DIR_OUT()\
+{\
+  STATUS = BANK_1;\
+  TRISB = 0x00;\
+  STATUS = BANK_0;\
+}
+                                        
 #define 	WR_DATA(a)			PORTB=(a)		
 #define 	RD_DATA()			PORTB
 
