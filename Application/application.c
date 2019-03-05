@@ -6,7 +6,6 @@
  */
 
 #include "application.h"
-#include <stdlib.h>
 
 F32 Saturation = 12.5f;
 F32 Increment = 0.5f;
