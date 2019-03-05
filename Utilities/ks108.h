@@ -70,5 +70,3 @@ void WriteChar(U8 ch, U8 rev);
 void ClearDisplay(void);
 
 #endif	/* KS108_H */
-
-
