@@ -59,4 +59,13 @@ void TestDotDisp(void){
     for(i = 0 ;i<10;i++){
         WriteCharAt('1',i,3U,0U);
     }
+    /*Print a sprite test*/
+    Print_Sprite_1(4U,4U);
+}
+
+void Print_Sprite_1(U8 x, U8 y){
+    WriteCharAt('0',x,y,0U);
+    WriteCharAt('0',x+1,y,0U);
+    WriteCharAt('0',x,y+1,0U);
+    WriteCharAt('0',x+1,y+1,0U);
 }
