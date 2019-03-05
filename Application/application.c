@@ -51,4 +51,7 @@ void TestDotDisp(void){
     /*Display the character 1 at the beginning of line 5 of the screen*/
     StartLine(5U);
     WriteChar('1', 0U);
+    /*display 2 at the beginning of line 9*/
+    StartLine(9U);
+    WriteChar('2', 0U);
 }
