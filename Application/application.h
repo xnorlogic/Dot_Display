@@ -41,6 +41,7 @@ void NO_Saturated_Counter(void);
 
 /*Dot display prototypes*/
 void TestDotDisp(void);
+void Print_Sprite_1(U8 x, U8 y);
 
 #endif	/* XC_APPLICATION_H */
 
